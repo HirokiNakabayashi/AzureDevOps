@@ -13,8 +13,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      "& 'C:\ProgramData\Miniconda3\shell\condabin\conda-hook.ps1' ; conda activate 'C:\ProgramData\Miniconda3' "
-      '[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12'
+      C\:\ProgramData\Miniconda3\shell\condabin\conda-hook.ps1 ; conda activate 'C:\ProgramData\Miniconda3'
+      [Net.ServicePointManager]\:\:SecurityProtocol = [Net.SecurityProtocolType]\:\:Tls12
       pip install -U outsystems-pipeline==$(OSPackageVersion)
     workingDirectory: $(System.DefaultWorkingDirectory)
   displayName: 'Install OutSystems Pipeline Package'
