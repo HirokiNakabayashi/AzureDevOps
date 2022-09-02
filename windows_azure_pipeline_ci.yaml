@@ -13,7 +13,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Set-Location -Path "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\"
+      Set-Location -Path "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\" -PassThru
       python -m pip install -U outsystems-pipeline
     workingDirectory: $(System.DefaultWorkingDirectory)
   displayName: 'Install OutSystems Pipeline Package'
