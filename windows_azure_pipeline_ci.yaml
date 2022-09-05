@@ -41,8 +41,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-#      python -m outsystems.pipeline.evaluate_test_results --artifacts "$(ArtifactsBuildFolder)"
-      Start-Process -FilePath "python" -ArgumentList "-m outsystems.pipeline.evaluate_test_results --artifacts $(ArtifactsBuildFolder)"
+      python -m outsystems.pipeline.evaluate_test_results --artifacts "$(ArtifactsBuildFolder)"
+#      Start-Process -FilePath "python" -ArgumentList "-m outsystems.pipeline.evaluate_test_results --artifacts $(ArtifactsBuildFolder)"
       exit 0
   displayName: 'Evaluate Test Results'
   continueOnError: true
