@@ -46,7 +46,7 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
-    testResultsFiles: '**\*.xml'
+    testResultsFiles: '$(ArtifactsBuildFolder)\*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
 
