@@ -30,6 +30,7 @@ steps:
 
 - task: PowerShell@2
   inputs:
+    delayForMinutes: '5'
     targetType: 'inline'
     script: Start-Process -FilePath "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\python.exe" -ArgumentList "-m outsystems.pipeline.generate_unit_testing_assembly --artifacts $(ArtifactsBuildFolder) --app_list $(ApplicationScopeWithTests) --cicd_probe_env $(ProbeEnvironmentURL) --bdd_framework_env $(BddEnvironmentURL)"
   displayName: 'Generate URLs for BDD testing'
@@ -46,7 +47,8 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
-    testResultsFiles: '$(ArtifactsBuildFolder)\*.xml'
+    delayForMinutes: '1'
+    testResultsFiles: '$(ArtifactsBuildFolder)\junit-result.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
 
