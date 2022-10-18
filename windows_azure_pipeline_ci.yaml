@@ -28,11 +28,9 @@ steps:
     script: Start-Process -FilePath "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\python.exe" -ArgumentList "-m outsystems.pipeline.deploy_latest_tags_to_target_env --artifacts $(ArtifactsBuildFolder) --lt_url $(LifeTimeHostname) --lt_token $(LifeTimeServiceAccountToken) --lt_api_version $(LifeTimeAPIVersion) --source_env $(DevelopmentEnvironment) --destination_env $(RegressionEnvironment) --app_list $(ApplicationScopeWithTests)"
   displayName: 'Deploy to CI Environment'
 
-# Delay v1
-# Delay further execution of a workflow by a fixed time.
-- task: Delay@1
-  inputs:
-    delayForMinutes: '5' # string. Required. Delay Time (minutes). Default: '0'.
+- powershell: |
+    Start-Sleep -Seconds 300
+  displayName: 'Sleep 5 minutes'
 
 - task: PowerShell@2
   inputs:
@@ -49,11 +47,9 @@ steps:
   displayName: 'Evaluate Test Results'
   continueOnError: true
 
-# Delay v1
-# Delay further execution of a workflow by a fixed time.
-- task: Delay@1
-  inputs:
-    delayForMinutes: '1' # string. Required. Delay Time (minutes). Default: '0'.
+- powershell: |
+    Start-Sleep -Seconds 60
+  displayName: 'Sleep 1 minutes'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
