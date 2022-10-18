@@ -28,9 +28,14 @@ steps:
     script: Start-Process -FilePath "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\python.exe" -ArgumentList "-m outsystems.pipeline.deploy_latest_tags_to_target_env --artifacts $(ArtifactsBuildFolder) --lt_url $(LifeTimeHostname) --lt_token $(LifeTimeServiceAccountToken) --lt_api_version $(LifeTimeAPIVersion) --source_env $(DevelopmentEnvironment) --destination_env $(RegressionEnvironment) --app_list $(ApplicationScopeWithTests)"
   displayName: 'Deploy to CI Environment'
 
+# Delay v1
+# Delay further execution of a workflow by a fixed time.
+- task: Delay@1
+  inputs:
+    delayForMinutes: '5' # string. Required. Delay Time (minutes). Default: '0'.
+
 - task: PowerShell@2
   inputs:
-    delayForMinutes: '5'
     targetType: 'inline'
     script: Start-Process -FilePath "C:\Users\buc02admin\AppData\Local\Programs\Python\Python310\python.exe" -ArgumentList "-m outsystems.pipeline.generate_unit_testing_assembly --artifacts $(ArtifactsBuildFolder) --app_list $(ApplicationScopeWithTests) --cicd_probe_env $(ProbeEnvironmentURL) --bdd_framework_env $(BddEnvironmentURL)"
   displayName: 'Generate URLs for BDD testing'
@@ -44,10 +49,15 @@ steps:
   displayName: 'Evaluate Test Results'
   continueOnError: true
 
+# Delay v1
+# Delay further execution of a workflow by a fixed time.
+- task: Delay@1
+  inputs:
+    delayForMinutes: '1' # string. Required. Delay Time (minutes). Default: '0'.
+
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
-    delayForMinutes: '1'
     testResultsFiles: '$(ArtifactsBuildFolder)\junit-result.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
