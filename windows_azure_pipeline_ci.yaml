@@ -48,8 +48,8 @@ steps:
   continueOnError: true
 
 - powershell: |
-    Start-Sleep -Seconds 60
-  displayName: 'Sleep 1 minutes'
+    Start-Sleep -Seconds 300
+  displayName: 'Sleep 5 minutes'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
